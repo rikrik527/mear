@@ -1,3 +1,6 @@
 {
-    "mongoURI":"mongodb+srv://rikrik527:<password>@yushan-li-1mf6b.mongodb.net/test?retryWrites=true&w=majority"
+    "mongoURI":"mongodb+srv://rikrik527:a96730976@yushan-li-1mf6b.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtSecret":"mysecrettoken",
+    "githubClientId":"d8387db983df32a64d3a",
+    "githubSecret":"841a1b181b788331decbbf8fa2377cbbc2fbe4b2"
 }
