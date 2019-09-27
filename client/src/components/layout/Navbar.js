@@ -1,26 +1,56 @@
-import React from 'react'
+import React,{Fragment} from 'react'
 import { Link } from 'react-router-dom'
-const Navbar =()=>{
-return(
-    <nav className='navbar bg-dark'>
-    <h1>
-      <Link to='/'>
-        <i className='fas fa-code' /> DevConnector
-      </Link>
-    </h1>
+import { connect } from 'react-redux'
+import {logout} from '../../actions/auth'
+import PropTypes from 'prop-types'
+
+const Navbar =({auth:{isAuthenticated,loading},logout})=>{
+  const authLinks =(
     <ul>
-        <li>
-            <a href="!#">Developer</a>
-        </li>
-        <li>
-           <Link to="/register">Register</Link>
-        </li>
-        <li>
-            <Link to="/login">Login</Link>
-        </li>
+      <li>
+       <Link to='/dashboard'>
+         <i className='fas fa-user'/>{''}
+         <span className='hide-sm'>我的帳戶</span>
+       </Link>
+      </li>
+      <li>
+        <a onClick={logout} href='#!'>//用戶登出
+          <i className='fas fa-sign-out-alt'/>{''}
+          <span className='hide-sm'>登出</span>
+        </a>
+      </li>
     </ul>
-   
-  </nav>
-)
+  )
+  const guestLinks=(
+    <ul>
+    <li>
+      <a href='#!'>Developer</a>
+    </li>
+    <li>
+      <Link to='/register'>註冊</Link>
+    </li>
+    <li>
+      <Link to='/login'>登入</Link>
+    </li>
+  </ul>
+  )
+  return(
+    <nav className='navbar bg-dark'>
+      <h1>
+        <Link to='/'>
+          <i className='fas fa-code'/>Mr-Judo
+        </Link>
+      </h1>
+     {!loading && (<Fragment>{isAuthenticated?authLinks :guestLinks}{console.log(isAuthenticated)}</Fragment>)}
+    </nav>
+  )
 }
-export default Navbar
+Navbar.propTypes ={
+  logout:PropTypes.func.isRequired,
+  auth:PropTypes.object.isRequired
+  
+}
+const mapStateToProps=state=>({
+  auth:state.auth
+})
+export default connect(mapStateToProps,{logout})(Navbar)

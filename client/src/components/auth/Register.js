@@ -3,9 +3,10 @@ import {Link} from 'react-router-dom'
 import axios from 'axios'
 import {connect} from 'react-redux'
 import {setAlert} from '../../actions/alert'
+import {register} from '../../actions/auth'
 import PropTypes from 'prop-types'
 
-const Register = ({ setAlert}) => {
+const Register = ({ setAlert,register}) => {
     const [formData,setFormData] = useState({
         name:'',
         email:'',
@@ -13,31 +14,32 @@ const Register = ({ setAlert}) => {
         password2:''
     })
     const {name,email,password,password2}=formData
-    const onChange = e=> setFormData({...formData,[e.target.name]:e.target.value})
+    const onChange = e=> 
+    setFormData({...formData,[e.target.name]:e.target.value})
+
     const onSubmit =async e =>{
         e.preventDefault()
         if(password !== password2){
             setAlert('Password do not match','danger')
         }else{
-            const newUser ={
-                name,
-                email,
-                password
-            }
-            try {
-                const config = {
-                    headers:{
-                        'Content-Type':'application/json'
-                    }
-                }
-                const body = JSON.stringify(newUser)
-                const res = await axios.post('/api/users',body,config)
-                console.log(res.data)
-            } catch (err) {
-                console.error(err.response.data)
-            }
+           register({ name,email,password})
+            // const newUser ={
+            //     name,
+            //     email,
+            //     password
+            // }
+            // try {
+            //     const config = {
+            //         headers:{
+            //             'Content-Type':'application/json'
+            //         }
+            //     }
+            //     const body = JSON.stringify(newUser)
+            //     const res = await axios.post('/api/users',body,config)
+            //     console.log(res.data)
+            } 
         }
-    }
+    
     return (
         <Fragment>
         <h1 className='large text-primary'>Sign Up</h1>
@@ -50,7 +52,7 @@ const Register = ({ setAlert}) => {
               type='text'
               placeholder='Name'
               name='name'
-              required
+              
               value={name}
               onChange={e=>onChange(e)}
             />
@@ -62,7 +64,7 @@ const Register = ({ setAlert}) => {
               name='email'
               value={email}
               onChange={e=>onChange(e)}
-              required
+              
             />
             <small className='form-text'>
               This site uses Gravatar so if you want a profile image, use a
@@ -97,6 +99,7 @@ const Register = ({ setAlert}) => {
 }
 Register.propTypes={
     setAlert:PropTypes.func.isRequired,
+    register:PropTypes.func.isRequired
 }
 
-export default connect(null,{setAlert})(Register)
+export default connect(null,{setAlert,register})(Register)
