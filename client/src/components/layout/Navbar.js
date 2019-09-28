@@ -14,7 +14,7 @@ const Navbar =({auth:{isAuthenticated,loading},logout})=>{
        </Link>
       </li>
       <li>
-        <a onClick={logout} href='#!'>//用戶登出
+        <a onClick={logout} href='#!'>
           <i className='fas fa-sign-out-alt'/>{''}
           <span className='hide-sm'>登出</span>
         </a>

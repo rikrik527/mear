@@ -1,9 +1,11 @@
 import React,{useEffect,Fragment} from 'react'
 import PropTypes from 'prop-types'
+import {Link } from 'react-router-dom'
 import {connect} from 'react-redux'
 import { displayData}from '../../actions/auth'
 import {getCurrentProfile} from '../../actions/profile'
 import Spinner from '../layout/Spinner'
+import DashboardAction from './DashboardAction'
 const Dashboard = ({getCurrentProfile,displayData,auth:{user},profile:{loading,profile}}) => {
     console.log('dashbors')
     useEffect(()=>{
@@ -12,37 +14,23 @@ const Dashboard = ({getCurrentProfile,displayData,auth:{user},profile:{loading,p
     },[])
     
 
-    return loading && profile === null ? <Spinner/> : <Fragment>
+    return loading && profile === null ? <Spinner render={console.log('loading')}/> : <Fragment>
         <h1 className='large text-primary'>Dashboard</h1>
         <p className='lead'>
             <i className='fas fa-user'/>Welcome {user && user.name}
-            
-            <div class="alert-primary" role="alert">
-  A simple primary alert—check it out!
-</div>
-<div class="alert alert-secondary" role="alert">
-  A simple secondary alert—check it out!
-</div>
-<div class="alert alert-success" role="alert">
-  A simple success alert—check it out!
-</div>
-<div class="alert alert-danger" role="alert">
-  A simple danger alert—check it out!
-</div>
-<div class="alert alert-warning" role="alert">
-  A simple warning alert—check it out!
-</div>
-<div class="alert alert-info" role="alert">
-  A simple info alert—check it out!
-</div>
-<div class="alert alert-light" role="alert">
-  A simple light alert—check it out!
-</div>
-<div class="alert alert-dark" role="alert">
-  A simple dark alert—check it out!
-</div>
         </p>
-        {profile !== null ?<Fragment>has</Fragment>:<Fragment>has not</Fragment>}
+        {profile !== null ?(
+            <Fragment>
+            <DashboardAction/>
+            </Fragment>
+            ):(
+            <Fragment>
+            <p>You have not yet setup a profile,please add some info</p>
+            <Link to='/create-profile' className='btn btn-primary'>
+                Create Profile
+            </Link>
+            </Fragment>
+        )}
     </Fragment>
 }
 
