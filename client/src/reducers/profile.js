@@ -25,6 +25,7 @@ export default function(state=initialState,action){
                     loading:false
                 }
                 case CLEAR_PROFILE:
+                   
                     return{
                         ...state,
                         profile:null,

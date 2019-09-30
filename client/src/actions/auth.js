@@ -9,7 +9,7 @@ export const loadUser =()=>async dispatch=>{
     }
     try {
         const res = await axios.get('/api/auth')
-        console.log('res = await axios.get(/api/auth)',res)
+        console.log('res = await axios.get(/api/auth)',res,'load user')
         dispatch({
             type:USER_LOADED,
             payload:res.data
@@ -32,15 +32,16 @@ export const register =({name,email,password})=>async dispatch=>{
     const body = JSON.stringify({name,email,password})
     try {
         const res = await axios.post('/api/users',body,config)
-        console.log('res',res.data)
+        console.log('res registered',res.data)
         dispatch({
             type:REGISTER_SUCCESS,
             payload:res.data
         })
-        dispatch(loadUser(),()=>console.log('register sucess load user'))
+        console.log('register sucess')
+        dispatch(loadUser())
     } catch (err) {
         const errors = err.response.data.errors
-        console.log('err.response',err.response)
+        console.log('err.response',err)
         if(errors){
             console.log('errors',errors)
             errors.forEach(error=>dispatch(setAlert(error.msg,'danger')))
@@ -60,7 +61,7 @@ export const login =(email,password)=>async dispatch=>{
     const body = JSON.stringify({email,password})
     try {
         const res = await axios.post('/api/auth',body,config)
-        console.log('login res.data',res.data)
+        console.log('login res.data',res)
         dispatch({
             type:LOGIN_SUCCESS,
             payload:res.data
@@ -68,7 +69,7 @@ export const login =(email,password)=>async dispatch=>{
         dispatch(loadUser())
     } catch (err) {
         const errors = err.response.data.errors
-        console.log('err.response',err.response)
+        console.log('err.response log fail',err.response)
         if(errors){
             console.log('errors',errors)
             errors.forEach(error=>dispatch(setAlert(error.msg,'danger')))

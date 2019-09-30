@@ -15,12 +15,13 @@ router.get('/me',auth,async(req,res)=>{
         'user',
         ['name','avatar']
     )
+    console.log('get profile backend api/profile/me',profile)
     if(!profile){
-        console.log("!profile")
+        console.log("no profile res",res,'profile',profile)
         return res.status(400).json({msg:"There is no profile for this user"});
     }
     }catch(err){
-        console.error(err.message)
+        console.error('get profile error',err.message)
         res.status(500).send("Server Error");
     }
 })
@@ -68,8 +69,7 @@ router.post('/',[auth,[
     if(skills){
         profileFields.skills = skills.split(',').map(skill=>skill.trim())
     }
-    console.log(profileFields.skills)
-     
+    
     //build social object
     profileFields.social = {}
     if (youtube) profileFields.social.youtube = youtube;
@@ -81,15 +81,18 @@ router.post('/',[auth,[
     try{
         let profile = await Profile.findOne({user:req.user.id})
         if(profile){
-            console.log('profile',profile)
+            console.log('api/profile post',profile)
            //update
            profile = await Profile.findOneAndUpdate(
                {user:req.user.id},
                {$set: profileFields},
-               {new: true},()=>{
-                   console.log('findoneandupdate')
-               }
+               {new: true}
+               
                )
+               
+                console.log('findoneandupdate')
+
+  console.log('profileFields from backend api/profile post',profileFields)
                return  res.json(profile);
         }
         //create
@@ -98,6 +101,7 @@ router.post('/',[auth,[
         res.json(profile)
 
     }catch(err){
+        console.log('err from api/profile post create or update profile')
         console.error(err.message)
         res.status(500).send("Server Error");
     }
@@ -110,10 +114,12 @@ router.post('/',[auth,[
 // public
 router.get('/',async(req,res)=>{
   try {
+      
       const profiles = await Profile.find().populate('user',['name','avatar'])
       res.json(profiles)
-      console.log('getting all profile')
+      console.log('getting all profile',profile)
   } catch (err) {
+      console.log('error get all profile err',err)
       console.error(err.message)
       res.status(500).send("Server error");
   }
@@ -126,12 +132,13 @@ router.get('/',async(req,res)=>{
         const profile = await Profile.find({user:req.params.user_id}).populate('user',['name','avatar'])
         if(!profile){
             return res.status(400).json({msg:'Profile not found'},()=>{ 
-                console.log('!profile')
+                console.log('profile not found while finding one profile')
             });
         }
-        console.log('find one profile')
+        console.log('find one profile',profile)
         res.json(profile)
     } catch (err) {
+        console.log('find one profile err',err)
         console.error(err.message)
         if(err.kind == 'ObjectId'){
             return res.status(400).json({msg:'Profile not found'});
@@ -152,6 +159,7 @@ router.delete('/',auth,async(req,res)=>{
         //remove user
         await User.findOneAndRemove({_id:req.user.id})
         res.status(500).json({msg:'User deleted'});
+        console.log('delete user post profile findOneAndRemove',user,_id)
     } catch (err) {
         console.error(err.message)
         res.status(500).send("Server error");
@@ -175,7 +183,7 @@ router.put('/experience',[auth,[
 ]],async(req,res)=>{
  const errors = validationResult(req)
  if(!errors.isEmpty()){
-     console.log('experience is not empty')
+     console.log('experience is not empty',errors)
      return res.status(400).json({errors:errors.array()});
  }
  const {
@@ -203,6 +211,7 @@ router.put('/experience',[auth,[
     await profile.save()
     res.json(profile) 
  } catch (err) {
+     console.log('porst profile experience err',err)
      console.error(err.message)
      res.status(500).send('Server error');
  }
@@ -220,7 +229,7 @@ router.delete('/experience/:exp_id',auth,async (req,res)=>{
        await profile.save()
        res.json(profile) 
     } catch (err) {
-        console.error(err.message)
+        console.error('from backend err',err.message)
      res.status(500).send('Server error');
     }
 })

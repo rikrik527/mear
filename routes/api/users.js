@@ -28,6 +28,7 @@ async (req,res)=>{
  // see if user exists
     let user = await User.findOne({email})
     if(user){
+        console.log('user already exists')
          return res.status(400).json({errors:[{msg:'User already exists'}]});
     }
     //get users gravatar
@@ -63,7 +64,7 @@ async (req,res)=>{
          res.json({token});
     })
     }catch(err){
-        console.error(err.message)
+        console.error('api/users/register err', err)
         res.status(500).send("Server error")
     }
    

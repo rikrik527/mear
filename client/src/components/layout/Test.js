@@ -15,7 +15,7 @@ class Test extends React.Component {
     }
   
     render() {
-        console.log(this.props,'this',this.textInput)
+        console.log(this.props,'this',this.textInput,'this.textinput.current',this.textInput.current)
       // tell React that we want to associate the <input> ref
       // with the `textInput` that we created in the constructor
       return (
