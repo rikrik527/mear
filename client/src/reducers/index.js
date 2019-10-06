@@ -3,9 +3,11 @@ import alert from './alert'
 import counter from './counter'
 import auth from './auth'
 import profile from './profile'
+import post from './post'
 export default combineReducers({
     alert,
     counter,
     auth,
-    profile
+    profile,
+    post
 })

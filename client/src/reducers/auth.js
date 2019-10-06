@@ -22,6 +22,7 @@ import {
   
     switch (type) {
       case USER_LOADED:
+          console.log('userloaded',state.user)
         return {
           ...state,
           isAuthenticated: true,

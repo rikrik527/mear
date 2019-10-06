@@ -13,7 +13,9 @@ import {
 
 // Get current users profile
 export const getCurrentProfile = () => async dispatch => {
+    console.log('getcurrentprofile')
   try {
+      console.log('getcurrentprofile is trying')
     const res = await axios.get('/api/profile/me');
     console.log('getcuurentprofile /api/profile/me res',res)
     dispatch({
@@ -71,13 +73,15 @@ export const getProfileById = userId => async dispatch => {
 // Get Github repos
 export const getGithubRepos = username => async dispatch => {
   try {
+      console.log('getgihubrepos trying...')
     const res = await axios.get(`/api/profile/github/${username}`);
-
+    console.log('getgithubrepos res',res)
     dispatch({
       type: GET_REPOS,
       payload: res.data
     });
   } catch (err) {
+      console.log('getgithubrepos err',err)
     dispatch({
       type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status }
