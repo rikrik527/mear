@@ -7,20 +7,23 @@ import {
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     LOGOUT,
-    ACCOUNT_DELETED
+    ACCOUNT_DELETED,
+    
   } from '../actions/types';
   
   const initialState = {
     token: localStorage.getItem('token'),
     isAuthenticated: null,
     loading: true,
-    user: null
+    user: null,
+    
   };
   
   export default function(state = initialState, action) {
     const { type, payload } = action;
   
     switch (type) {
+      
       case USER_LOADED:
           console.log('userloaded',state.user)
         return {

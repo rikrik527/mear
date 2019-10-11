@@ -4,12 +4,14 @@ import {connect} from 'react-redux'
 import {getProfiles} from '../../actions/profile'
 import Spinner from '../layout/Spinner'
 import ProfileItem from './ProfileItem'
+
 const Profiles = ({getProfiles,profile:{profiles,loading}})=>{
     useEffect(() => {
         getProfiles()
     }, [getProfiles])
     console.log('profiles profiles',profiles)
     return <Fragment>
+ 
         {loading ? <Spinner/> : <Fragment>
         <h1 className='large text-primary'>developers</h1>
         <p className='lead'>

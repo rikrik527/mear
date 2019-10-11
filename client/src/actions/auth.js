@@ -2,6 +2,8 @@ import axios from 'axios'
 import {REGISTER_SUCCESS,REGISTER_FAIL,USER_LOADED,AUTH_ERROR,LOGIN_SUCCESS,LOGIN_FAIL,LOGOUT,DISPLAY_DATA,REMOVE_DISPLAY_DATA,CLEAR_PROFILE}from'./types'
 import {setAlert} from './alert'
 import setAuthToken from '../utils/setAuthToken'
+
+
 //load user
 export const loadUser =()=>async dispatch=>{
     if(localStorage.token){
@@ -20,6 +22,7 @@ export const loadUser =()=>async dispatch=>{
         })
     }
 }
+//show navbar after login
 
 
 //register user

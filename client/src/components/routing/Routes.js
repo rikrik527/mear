@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{Fragment} from 'react'
 import PropTypes from 'prop-types'
 import { Route, Switch} from 'react-router-dom'
 import Register from '../auth/Register'
@@ -17,8 +17,13 @@ import Profile from '../profile/Profile'
 import Posts from '../posts/Posts'
 import Post from '../post/Post'
 import NotFound from '../layout/NotFound'
+import Navbar from '../../components/layout/Navbar'
 const Routes = () => {
   return (
+ 
+    <Fragment>
+      <Navbar/>
+    
     <section className="container">  
     <Alert/>
   
@@ -38,7 +43,7 @@ const Routes = () => {
       <Route component={NotFound}/>
     </Switch>
     </section>
-
+</Fragment>
   )
 }
 
