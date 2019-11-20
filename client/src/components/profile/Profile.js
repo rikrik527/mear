@@ -16,9 +16,9 @@ const Profile = ({
     loading
   },
   auth,
-  match
+  match,props
 }) => {
-  console.log('Profile match', match)
+  console.log('Profile match', match,props)
   useEffect(() => {
     getProfileById(match.params.id)
   }, [getProfileById])

@@ -8,6 +8,7 @@ import Experience from './Experience';
 import Education from './Education';
 import { getCurrentProfile, deleteAccount } from '../../actions/profile';
 
+
 const Dashboard = ({
   getCurrentProfile,
   deleteAccount,
@@ -22,8 +23,8 @@ const Dashboard = ({
     <Spinner />
   ) : (
     <Fragment>
-      <h1 className='large text-primary'>Dashboard</h1>
-      <p className='lead'>
+      <h1 className='large text-orange'>Dashboard</h1>
+      <p className='lead text-yellow'>
         <i className='fas fa-user' /> Welcome {user && user.name}
       </p>
       {profile !== null ? (

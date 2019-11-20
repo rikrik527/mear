@@ -1,36 +1,40 @@
-import React from 'react'
-class Test extends React.Component {
-    constructor(props) {
-      super(props);
-      // create a ref to store the textInput DOM element
-      this.textInput = React.createRef();
-      this.focusTextInput = this.focusTextInput.bind(this);
-    }
-  
-    focusTextInput() {
-      // Explicitly focus the text input using the raw DOM API
-      // Note: we're accessing "current" to get the DOM node
-      this.textInput.current.focus();
-     this.textInput.current.style.border='4px solid black'
-    }
-  
-    render() {
-        console.log(this.props,'this',this.textInput,'this.textinput.current',this.textInput.current)
-      // tell React that we want to associate the <input> ref
-      // with the `textInput` that we created in the constructor
-      return (
-        <div>
-          <input
-            type="text"
-            ref={this.textInput} className='a'/>
-  
-          <input
-            type="button"
-            value="Focus the text input"
-            onClick={this.focusTextInput}
-          />
-        </div>
-      );
-    }
+import React ,{useEffect,useRef} from 'react'
+import styled from 'styled-components'
+
+const Wrapper = styled.div`
+input{
+  color:#666;
+  border:1px solid #ccc;
+  outline:none;
+  &.active{
+    color:#000;
+    border-color:#000;
   }
+}
+`;
+function Test(){
+  const refInput = useRef();
+
+  useEffect(()=>{
+    const{current} = refInput
+    const handleFocus = ()=>{
+      current.classList.add('active')
+    }
+    const handleBlur =()=>{
+      current.classList.remove('active')
+    }
+    current.addEventListener('focus',handleFocus)
+    current.addEventListener('blur',handleBlur)
+    return ()=>{
+      current.removeEventListener('focus',handleFocus)
+      current.removeEventListener('blur',handleBlur)
+    }
+  })
+
+  return (
+    <Wrapper>
+      <input type='text' ref={refInput} defaultValue='Focus me'/>
+    </Wrapper>
+  )
+}
 export default Test

@@ -12,7 +12,8 @@ import { loadUser ,isGuest} from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
 
 import './App.css';
-import './color.scss'
+import './color.scss';
+import './New.scss'
 import './bootstrap/bootstrap.scss'
 
 if (localStorage.token) {

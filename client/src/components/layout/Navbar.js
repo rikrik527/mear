@@ -64,7 +64,7 @@ const Navbar = ({
 
       <nav className='navbar bg-bluegrey10' style={{height:'4rem',paddingTop:'1rem'}}>
       
-          <Link to='/'><h6>
+          <Link className='navbar-brand ' to='/'><h6>
             <i className='fas fa-code'/>mrjudobook</h6>
           </Link>
        

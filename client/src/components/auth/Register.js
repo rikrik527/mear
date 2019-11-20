@@ -5,9 +5,10 @@ import {connect} from 'react-redux'
 import {setAlert} from '../../actions/alert'
 import {register} from '../../actions/auth'
 import PropTypes from 'prop-types'
-
+import './style.scss'
 
 const Register = ({ setAlert,register,isAuthenticated}) => {
+  console.log('register')
     const [formData,setFormData] = useState({
         name:'',
         email:'',
@@ -45,9 +46,9 @@ const Register = ({ setAlert,register,isAuthenticated}) => {
         }
     
     return (
-        <Fragment>
+        <div className='fading-background'>
         <h1 className='large text-primary'>Sign Up</h1>
-        <p className='lead'>
+        <p className='lead text-white'>
           <i className='fas fa-user' /> Create Your Account
         </p>
         <form className='form' onSubmit={e=>onSubmit(e)}>
@@ -98,7 +99,7 @@ const Register = ({ setAlert,register,isAuthenticated}) => {
         <p className='my-1'>
           Already have an account? <Link to='/login'>Sign In</Link>
         </p>
-      </Fragment>
+      </div>
     )
 }
 Register.propTypes={

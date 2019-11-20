@@ -33,7 +33,7 @@ router.post(
 
     try {
       let user = await User.findOne({ email });
-
+      console.log('user',user)
       if (user) {
         return res
           .status(400)
@@ -52,6 +52,7 @@ router.post(
         avatar,
         password
       });
+      console.log('user new user',user)
 
       const salt = await bcrypt.genSalt(10);
 

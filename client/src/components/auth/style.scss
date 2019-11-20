@@ -1,0 +1,7 @@
+.fading-background{
+    animation: fading 3s linear;
+    @keyframes fading {
+        from{opacity: 0;}
+        to{opacity: 1;}
+    }
+}
