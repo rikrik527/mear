@@ -8,6 +8,8 @@ import {
     LOGIN_FAIL,
     LOGOUT,
     ACCOUNT_DELETED,
+    ISNAVBAR,
+    NOTNAVBAR
     
   } from '../actions/types';
   
@@ -16,6 +18,7 @@ import {
     isAuthenticated: null,
     loading: true,
     user: null,
+    isNavbar:null
     
   };
   
@@ -23,7 +26,16 @@ import {
     const { type, payload } = action;
   
     switch (type) {
-      
+      case ISNAVBAR:
+        return{
+          ...state,
+          isNavBar:payload
+        }
+        case NOTNAVBAR:
+          return{
+            ...state,
+            isNavBar:payload
+          }
       case USER_LOADED:
           console.log('userloaded',state.user)
         return {

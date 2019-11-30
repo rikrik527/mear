@@ -15,7 +15,7 @@ View the project on Github : https://github.com/akzhy/Vara
   transition: all .5s linear!important;
   left: -60px!important;
   position: absolute!important;
-  display: none;
+  display: none!important;
   
 }
 
@@ -44,7 +44,8 @@ View the project on Github : https://github.com/akzhy/Vara
 }
 .book {
   transform-style: preserve-3d;
-  transform: rotateX(45deg) rotateY(0deg) rotateZ(-11deg);
+  transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg)scale(10);
+ 
   transition: transform 3s;
   position: absolute;
   left: 0;
@@ -126,7 +127,7 @@ View the project on Github : https://github.com/akzhy/Vara
   background: #e1e1e1;
 }
 .book .first.paper .back {
-  background: #596ecc;
+  background:black;
   cursor: pointer;
 }
 .book .intro {
@@ -179,6 +180,7 @@ View the project on Github : https://github.com/akzhy/Vara
   transform: translateZ(-2px);
 }
 .book .paper.first {
+  transform: translateZ(0.4px)rotatey(-180deg);
   z-index: 8;
 }
 .book .paper.second {
@@ -221,4 +223,15 @@ View the project on Github : https://github.com/akzhy/Vara
 }
 @media (max-width: 700px) {
  
+}
+@media (max-device-width:375px) and (max-device-height:812px){
+  .book{
+    transform: rotateX(45deg) rotateY(0deg) rotateZ(-11deg)scale(10)translatex(-2px)
+  }
+}
+
+canvas{
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }

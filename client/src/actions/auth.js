@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {REGISTER_SUCCESS,REGISTER_FAIL,USER_LOADED,AUTH_ERROR,LOGIN_SUCCESS,LOGIN_FAIL,LOGOUT,DISPLAY_DATA,REMOVE_DISPLAY_DATA,CLEAR_PROFILE}from'./types'
+import {REGISTER_SUCCESS,REGISTER_FAIL,USER_LOADED,AUTH_ERROR,LOGIN_SUCCESS,LOGIN_FAIL,LOGOUT,DISPLAY_DATA,REMOVE_DISPLAY_DATA,CLEAR_PROFILE, ISNAVBAR,NOTNAVBAR}from'./types'
 import {setAlert} from './alert'
 import setAuthToken from '../utils/setAuthToken'
 
@@ -89,6 +89,18 @@ export const logout =()=>dispatch =>{
     })
     dispatch({
         type:LOGOUT
+    })
+}
+export const isNavbar =()=> dispatch =>{
+    dispatch({
+        type:ISNAVBAR,
+        payload:document.body.style.paddingTop='64px'
+    })
+}
+export const notNavbar =()=> dispatch =>{
+    dispatch({
+        type:NOTNAVBAR,
+        payload:document.body.style.paddingTop='0px'
     })
 }
 export const displayData =(name,avatar)=>async dispatch=>{

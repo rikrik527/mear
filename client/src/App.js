@@ -23,9 +23,7 @@ if (localStorage.token) {
 const App = (props) => {
   
   useEffect(() => {
-    let a = 0
-   
-      console.log('a',a+=1)
+    
        
       store.dispatch(loadUser());
       
